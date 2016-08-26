@@ -4,10 +4,10 @@ function ctxTest() {
     console.log(ctx);
 }
 
-var Score = function  drawScore() {
-    ctx.font = "italic bold 16px Roboto";
-    ctx.fillStyle = "#0000";
-    ctx.fillText("score: "+ player.score, 1, 600);
+var Score = function() {
+    ctx.font = "italic bold 16px Futura";
+    ctx.fillStyle = "Blue";
+    ctx.fillText("Score: "+ player.score, 1, 600);
 };
 
 
@@ -93,6 +93,15 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+Player.prototype.scoreData = function(){
+
+  if(this.y === -20){
+    this.score += 100;
+    console.log("scoreData");
+  }
+console.log("scoreData");
+};
+
 
 
 
@@ -133,8 +142,8 @@ Player.prototype.handleInput = function(key) {
     }
 
       if(this.y === -20){
-        alert("YOU WIN!!!!!!");
-        this.score += 20;
+        //alert("YOU WIN!!!!!!");
+        //this.score += 100;
 
       }
 
@@ -193,8 +202,8 @@ var Gem = function(x,y){
 Gem.prototype.reset = function(){
   this.x = -100;
   this.y = 0;
-};
 
+}
 Gem.prototype.update = function(){
 
     this.x = 200;
@@ -246,7 +255,7 @@ Gem.prototype.collision = function() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 
-//var score = new Score();
+
 
 var gem = new Gem();
 var player = new Player();
