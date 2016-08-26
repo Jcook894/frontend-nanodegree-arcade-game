@@ -1,3 +1,17 @@
+
+
+var Score = function() {
+  ctx.clearRect(1, 100, 100,100);
+  ctx.font = "46 Futura";
+  ctx.textAlign = "left";
+  ctx.fillStyle = "#ff0000";
+  ctx.fillText("Player Score:", 100, 380);
+
+};
+
+
+
+
 // Enemies our player must avoid
 var Enemy = function(x,y) {
     // Variables applied to each of our instances go here,
@@ -51,7 +65,7 @@ var Player = function(x,y) {
     this.height = 50;
     this.x =  200;
     this.y = 380;
-    this.score = 0
+    this.score = 0;
 };
 
 Player.prototype.reset = function (){
@@ -64,7 +78,7 @@ Player.prototype.reset = function (){
 Player.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
-      for(var i = 0;i < allEnemies.length;i++){
+    for(var i = 0;i < allEnemies.length;i++){
         if(this.y <= 0) {
             this.x = 200;
             this.y = 380;
@@ -76,6 +90,12 @@ Player.prototype.update = function(dt) {
 // Draw the player on the screen, required method for game
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Player.prototype.score = function() {
+    if(this.score === -20){
+      Alert("You win!");
+    }
 };
 
 
@@ -112,14 +132,18 @@ Player.prototype.handleInput = function(key) {
             console.log(this.y);
             break;
        default:
-            
-
-
-
+      console.log("whats good!");
     }
-    if(this.y === -20){
-      alert("YOU WIN!!!!!!");
-    }
+
+      if(this.y === -20){
+        alert("YOU WIN!!!!!!");
+      }
+
+      if(this.y === 220){
+        gem.collision();
+
+      }
+
 
 };
 
@@ -130,19 +154,21 @@ Player.prototype.handleInput = function(key) {
 
 
 
+
+
 var checkCollisions = function(targets){
-    var target;
+  var target;
     if (Array.isArray(targets)){
         for (var i =0; i < targets.length; i++){
             target = targets[i];
-            if (targets === allEnemies){
+            if (targets > allEnemies){
                 target.width = 50;
                 target.height = 40;
             }
             if (player.x < target.x + target.width && player.x + player.width  > target.x && player.y < target.y + target.height && player.y + player.height > target.y){
             	console.count('collision');
 
-              player.reset();
+              //player.reset();
               return true;
 
             }
@@ -158,45 +184,57 @@ var checkCollisions = function(targets){
 
 
 var Gem = function(x,y){
-  this.x = [2,275,300];
-  this.y = [200,150,80];
+  this.x = x;
+  this.y = y;
   this.width = 50;
   this.height = 40;
   this.sprite = 'images/gem-blue.png';
 
 }
 
+Gem.prototype.reset = function(){
+  this.x = -100;
+  this.y = 0;
+};
+
 Gem.prototype.update = function(){
 
-    this.x = 200
-    this.y = 200
+    this.x = 200;
+    this.y = 200;
+
+
 
 };
+
 
 Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 
 };
 
-Gem.prototype.collision = function(player) {
 
-  for(var i = 0; i < Player.length; i++){
+
+
+Gem.prototype.collision = function() {
+
+  for(var i = 0; i < this.length; i++){
+
     if(player.x < this.x + this.width &&
     player.x + player.width > this.x &&
     player.y < this.y + this.height &&
     player.height + player.y > this.y);
 }
+
     console.log("got a gem!");
-
+    console.count("Gem collision");
     gem.reset();
-};
 
-Gem.prototype.reset = function(){
 
-  this.x = 0;
-  this.y = 0;
 
 };
+
+
+
 
 
 
@@ -206,7 +244,6 @@ Gem.prototype.reset = function(){
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-
 var gem = new Gem();
 var player = new Player();
 
