@@ -26,7 +26,7 @@ var Engine = (function(global) {
         lastTime;
 
     canvas.width = 505;
-    canvas.height = 606;
+    canvas.height = 700;
     doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
@@ -94,7 +94,7 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.update(); 
+        player.update();
     }
     gem.update();
 
@@ -139,7 +139,10 @@ var Engine = (function(global) {
 
         renderEntities();
 
+
     }
+
+
 
     /* This function is called by the render function and is called on each game
      * tick. Its purpose is to then call the render functions you have defined
@@ -190,4 +193,5 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
+    var score = new Score();
 })(this);

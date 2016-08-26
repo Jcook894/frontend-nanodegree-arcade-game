@@ -1,12 +1,13 @@
 
 
-var Score = function() {
-  ctx.clearRect(1, 100, 100,100);
-  ctx.font = "46 Futura";
-  ctx.textAlign = "left";
-  ctx.fillStyle = "#ff0000";
-  ctx.fillText("Player Score:", 100, 380);
+function ctxTest() {
+    console.log(ctx);
+}
 
+var Score = function  drawScore() {
+    ctx.font = "italic bold 16px Roboto";
+    ctx.fillStyle = "#0000";
+    ctx.fillText("score: "+ player.score, 1, 600);
 };
 
 
@@ -92,11 +93,7 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Player.prototype.score = function() {
-    if(this.score === -20){
-      Alert("You win!");
-    }
-};
+
 
 
 //Player movement and border for canvas
@@ -137,9 +134,11 @@ Player.prototype.handleInput = function(key) {
 
       if(this.y === -20){
         alert("YOU WIN!!!!!!");
+        this.score += 20;
+
       }
 
-      if(this.y === 220){
+      if(this.y === 60 && this.x === 200){
         gem.collision();
 
       }
@@ -168,9 +167,8 @@ var checkCollisions = function(targets){
             if (player.x < target.x + target.width && player.x + player.width  > target.x && player.y < target.y + target.height && player.y + player.height > target.y){
             	console.count('collision');
 
-              //player.reset();
+              player.reset();
               return true;
-
             }
         }
     }
@@ -200,7 +198,7 @@ Gem.prototype.reset = function(){
 Gem.prototype.update = function(){
 
     this.x = 200;
-    this.y = 200;
+    this.y = 60;
 
 
 
@@ -217,7 +215,7 @@ Gem.prototype.render = function() {
 
 Gem.prototype.collision = function() {
 
-  for(var i = 0; i < this.length; i++){
+  for(var i = 0; i < this.y; i++){
 
     if(player.x < this.x + this.width &&
     player.x + player.width > this.x &&
@@ -229,6 +227,9 @@ Gem.prototype.collision = function() {
     console.count("Gem collision");
     gem.reset();
 
+    if(player.y === this.y){
+      player.score += 20;
+        }
 
 
 };
@@ -244,6 +245,9 @@ Gem.prototype.collision = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+
+//var score = new Score();
+
 var gem = new Gem();
 var player = new Player();
 
