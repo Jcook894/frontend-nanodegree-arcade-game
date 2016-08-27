@@ -8,6 +8,7 @@ var Score = function() {
     ctx.clearRect(1, 580, 600, 20);
     ctx.font = "italic bold 16px Futura";
     ctx.fillStyle = "Blue";
+    ctx.fillText("Score: "+ player.score, 1, 600);
 };
 
 
@@ -143,10 +144,10 @@ Player.prototype.handleInput = function(key) {
     }
 
         if (this.y === -20){
-        this.score += 100; // Add 100 points to the player score
-        ctx.clearRect(1, 580, 600, 20); // clear a rectangle over the score text
-        ctx.fillText("Score: "+ player.score, 1, 600); // re-draw the score text
-      }
+          this.score += 100; // Add 100 points to the player score
+          ctx.clearRect(1, 580, 600, 20); // clear a rectangle over the score text
+          ctx.fillText("Score: "+ player.score, 1, 600); // re-draw the score text
+          }
 
         if(this.score >= 1000){
           alert("You win!");
@@ -180,8 +181,8 @@ var checkCollisions = function(targets){
             }
             if (player.x < target.x + target.width && player.x + player.width  > target.x && player.y < target.y + target.height && player.y + player.height > target.y){
             	console.count('collision');
-              player.score -= 20;
-              player.reset();
+              //player.score -= 20;
+              //player.reset();
               return true;
             }
         }
@@ -197,8 +198,8 @@ var checkCollisions = function(targets){
 
 
 var Gem = function(x,y){
-  this.x = x;
-  this.y = y;
+  this.x = 200;
+  this.y = 60;
   this.width = 50;
   this.height = 40;
   this.sprite = 'images/gem-blue.png';
@@ -206,15 +207,18 @@ var Gem = function(x,y){
 }
 
 Gem.prototype.reset = function(){
-  this.y = Math.floor(Math.random()*  3);
-  this.x = Math.floor(Math.random() * 20);
+  this.y = Math.floor(Math.random()*  200);
+  this.x = Math.floor(Math.random() * 300);
 }
 Gem.prototype.update = function(){
+  for(var i = 0; i === this.y; i++){
+    if(player.y && player.x === this.y && this.y){
+      this.y = Math.floor(Math.random() * 200);
+      this.x = Math.floor(Math.random() * 200);
 
-    this.x = 200;
-    this.y = 60;
+    }
 
-
+ }
 
 };
 
@@ -242,6 +246,7 @@ if (player.x == this.x && player.y == this.y) {
 
       player.score += 20;
       gem.reset();
+      gem.collision();
 }
 
 };
