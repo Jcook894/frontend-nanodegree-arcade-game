@@ -1,3 +1,4 @@
+// Sets up score board and Instructions on the canvas
 
     var Score = function() {
             ctx.clearRect(1, 580, 600, 20);
@@ -90,7 +91,7 @@
         };
 
 
-        //Player movement and border for canvas
+//Player movement and border for canvas
 
 
     Player.prototype.handleInput = function(key) {
@@ -152,7 +153,8 @@
 
 
 
-
+// Checks if player collides with enemy and sends him back
+// to his starting point.
 
         var checkCollisions = function(targets){
           var target;
@@ -180,7 +182,6 @@
 
 
 
-
         var Gem = function(x,y){
           this.x = 200;
           this.y = 60;
@@ -192,7 +193,7 @@
 
         Gem.prototype.reset = function(){
 
-          this.y = Math.floor(Math.random()*  200);
+          this.y = Math.floor(Math.random()*  200); // resets gem to different points on canvas
           this.x = Math.floor(Math.random() * 300);
 
         }
@@ -202,12 +203,6 @@
             this.y = 60;
             this.x = 200;
 
-           if(player.y && player.x === this.y && this.y){
-              this.y = Math.floor(Math.random() * 200);
-              this.x = Math.floor(Math.random() * 200);
-
-
-           }
         };
 
 
@@ -218,6 +213,8 @@
 
 
 
+
+// Gem collision on different points on the canvas.
 
         Gem.prototype.collision = function() {
 
