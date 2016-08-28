@@ -134,6 +134,7 @@
 
         if(this.score >= 1000){
                   alert("You win!");
+                  this.score = 0;
                 }
 
         if(this.x < gem.x + gem.width &&
