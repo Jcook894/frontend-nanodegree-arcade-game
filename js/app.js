@@ -63,7 +63,7 @@
             this.height = 50;
             this.x =  200;
             this.y = 380;
-            this.score = 0 ;
+            this.score = 0;
         };
 
     Player.prototype.reset = function (){
@@ -179,9 +179,6 @@
 
 
 
-
-
-
         var Gem = function(x,y){
           this.x = 200;
           this.y = 60;
@@ -232,17 +229,9 @@
         };
 
 
-
-
-
-
-
-
-
         // Now instantiate your objects.
         // Place all enemy objects in an array called allEnemies
         // Place the player object in a variable called player
-
 
 
         var gem = new Gem();
